@@ -47,24 +47,28 @@
         mode = "n";
         key = "[d";
         action = "vim.diagnostic.goto_prev";
+        lua = true;
         options = { desc = "Go to previous [D]iagnostic Message"; };
       } 
       {
         mode = "n";
         key = "]d";
         action = "vim.diagnostic.goto_next";
+        lua = true;
         options = { desc = "Go to next [D]iagnostic Message"; };
       } 
       {
         mode = "n";
         key = "<leader>e";
         action = "vim.diagnostic.open_float";
+        lua = true;
         options = { desc = "Show diagnostic [E]rror messages"; };
       } 
       {
         mode = "n";
         key = "<leader>q";
         action = "vim.diagnostic.setloclist";
+        lua = true;
         options = { desc = "Open diagnostic [Q]uickfix list"; };
       }
       {
@@ -132,7 +136,26 @@
         lua = true;
         options = { desc = "[S]earch [N]eovim files"; };
       }
-    ];
+    ] ++ (let 
+      mkMap = keys: func: desc: {
+          mode = "n";
+          key = "${keys}";
+          action = "${func}";
+          lua = true;
+          options.desc = "LSP: ${desc}";
+        };
+    in [
+      (mkMap "gd" "require('telescope.builtin').lsp_definitions" "[G]oto [D]efinition")
+      (mkMap "gr" "require('telescope.builtin').lsp_references" "[G]oto [R]eferences")
+      (mkMap "gI" "require('telescope.builtin').lsp_implementations" "[G]oto [I]mplementations")
+      (mkMap "<leader>D" "require('telescope.builtin').lsp_type_definitions" "Type [D]efinitions")
+      (mkMap "<leader>ds" "require('telescope.builtin').lsp_document_symbols" "[D]ocument [S]ymbols")
+      (mkMap "<leader>ws" "require('telescope.builtin').lsp_workspace_symbols" "[W]orkspace [S]ymbols")
+      (mkMap "<leader>rn" "vim.lsp.buf.rename" "[R]e[n]ame")
+      (mkMap "<leader>ca" "vim.lsp.buf.code_action" "[C]ode [A]ction")
+      (mkMap "K" "vim.lsp.buf.hover" "Hover Documentation")
+      (mkMap "gD" "vim.lsp.buf.declaration" "[G]oto [D]eclaration")
+    ]);
     autoGroups = {
       kickstart-highlight-yank = {
         clear = true;
@@ -187,6 +210,67 @@
           "<leader><leader>" = { action = "buffers"; desc = "[ ] Find existing buffers"; };
         };
       };
+      lsp = {
+        enable = true;
+        # FIXME: does not work
+        onAttach = ''
+          if client and client.server_capabilities.documentHighlightProvider then
+            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+              buffer = bufnr,
+              callback = vim.lsp.buf.document_highlight,
+            })
+
+            vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+              buffer = bufnr,
+              callback = vim.lsp.buf.clear_references,
+            })
+          end
+        '';
+        capabilities = "capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())";
+        servers = {
+          lua-ls = {
+            enable = true;
+            extraOptions = {
+              settings.Lua.completion.callSnippet = "Replace";
+            };
+          };
+        };
+      };
+      fidget.enable = true;
+      nvim-cmp = {
+        enable = true;
+        snippet.expand = helpers.mkRaw "function(args) require('luasnip').lsp_expand(args.body) end";
+        completion.completeopt = "menu,menuone,noinsert";
+        mapping = {
+          "<C-n>" = "cmp.mapping.select_next_item()";
+          "<C-p>" = "cmp.mapping.select_prev_item()";
+          "<C-y>" = "cmp.mapping.confirm { select = true }";
+          "<C-Space>" = "cmp.mapping.complete {}";
+          "<C-l>" = {
+            action = "function() 
+              if require('luasnip').expand_or_locally_jumpable() then
+                require('luasnip').expand_or_jump()
+              end
+            end";
+            modes = [ "i" "s" ]; 
+          };
+          "<C-h>" = {
+            action = "function() 
+              if require('luasnip').locally_jumpable(-1) then
+                require('luasnip').jump(-1)
+              end
+            end";
+            modes = [ "i" "s" ]; 
+          };
+        };
+        autoEnableSources = true;
+        sources = [
+          { name = "nvim_lsp"; }
+          { name = "luasnip"; }
+          { name = "path"; }
+        ];
+      };
+      luasnip.enable = true;
     };
     extraPlugins = with pkgs.vimPlugins; [
       vim-sleuth
