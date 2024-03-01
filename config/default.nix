@@ -11,11 +11,12 @@
       maplocalleader = " ";
     };
 
+    clipboard.register = "unnamedplus";
+
     options = {
       number = true;
       mouse = "a";
       showmode = false;
-      clipboard = "unnamedplus";
       breakindent = true;
       undofile = true;
       ignorecase = true;
@@ -271,9 +272,35 @@
         ];
       };
       luasnip.enable = true;
+      todo-comments = {
+        enable = true;
+        signs = false;
+      };
+      mini = {
+        enable = true;
+        modules = {
+          ai = {
+            n_lines = 500;
+          };
+          surround = { };
+          statusline = { };
+        };
+      };
     };
+
+    colorschemes.tokyonight = {
+      enable = true;
+      style = "night";
+      styles.comments.italic = false;
+    };
+
     extraPlugins = with pkgs.vimPlugins; [
       vim-sleuth
+      plenary-nvim
     ];
+
+    extraConfigLua = ''
+      require('mini.statusline').section_location = function() return ''' end;
+    '';
   };
 }
