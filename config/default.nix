@@ -213,7 +213,6 @@
       };
       lsp = {
         enable = true;
-        # FIXME: does not work
         onAttach = ''
           if client and client.server_capabilities.documentHighlightProvider then
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -285,6 +284,11 @@
           surround = { };
           statusline = { };
         };
+      };
+      treesitter = {
+        enable = true;
+        ensureInstalled = [ "bash" "c" "html" "lua" "markdown" "vim" "vimdoc" ];
+        indent = true;
       };
     };
 
