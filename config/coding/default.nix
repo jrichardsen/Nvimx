@@ -9,7 +9,7 @@
 
   config = {
     plugins = {
-      comment-nvim.enable = true;
+      comment.enable = true;
       mini = {
         enable = true;
         modules = {

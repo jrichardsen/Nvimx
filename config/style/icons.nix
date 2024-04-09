@@ -18,8 +18,8 @@ in {
         info = " ";
       };
       file = {
-        modified = "  ";
-        readonly = " 󰌾 ";
+        modified = " ";
+        readonly = "󰌾 ";
       };
       git = {
         added = " ";
