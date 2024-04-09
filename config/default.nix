@@ -5,7 +5,7 @@
 {
   imports = [
     ./coding
-    ./colorscheme
+    ./style
     ./editor
     ./lsp
     ./ui

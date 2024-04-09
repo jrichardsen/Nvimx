@@ -1,6 +1,12 @@
 {
+  config,
+  ...
+}:
+{
   config = {
-    plugins.lualine = {
+    plugins.lualine = let
+      symbols = config.style.symbols;
+    in {
       enable = true;
       sections = {
         lualine_a = [ "mode" ];
@@ -8,8 +14,10 @@
           "branch"  
           {
             name = "diff";
-            extraConfig.symbols = {
-              # TODO: add symbols
+            extraConfig.symbols = { 
+              added = symbols.git.added;
+              modified = symbols.git.modified;
+              removed = symbols.git.removed;
             };
           }
         ];
@@ -27,7 +35,9 @@
             extraConfig = {
               path = 1;
               symbols = {
-                # TODO: add symbols
+                modified = symbols.file.modified;
+                readonly = symbols.file.readonly;
+                unnamed = symbols.file.unnamed;
               };
             };
           }
@@ -35,8 +45,11 @@
         lualine_x = [
           {
             name = "diagnostics";
-            extraConfig.symbols = { 
-              # TODO: add symbols
+            extraConfig.symbols = {
+              error = symbols.diagnostics.error;
+              warn = symbols.diagnostics.warn;
+              info = symbols.diagnostics.info;
+              hint = symbols.diagnostics.hint;
             };
           }
         ];
