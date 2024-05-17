@@ -1,5 +1,6 @@
 {
   imports = [
+    ./diagnostics.nix
     ./languages
   ];
   config = {

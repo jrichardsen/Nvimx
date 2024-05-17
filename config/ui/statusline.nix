@@ -1,4 +1,5 @@
 {
+  lib,
   config,
   ...
 }:
@@ -6,12 +7,16 @@
   config = {
     plugins.lualine = let
       symbols = config.style.symbols;
+      enableIcons = config.style.enableIcons;
     in {
       enable = true;
+      iconsEnabled = enableIcons;
       sections = {
         lualine_a = [ "mode" ];
         lualine_b = [ 
           "branch"  
+        ];
+        lualine_c = [ 
           {
             name = "diff";
             extraConfig.symbols = { 
@@ -20,16 +25,14 @@
               removed = symbols.git.removed;
             };
           }
-        ];
-        lualine_c = [ 
-          {
+          (lib.mkIf enableIcons {
             name = "filetype"; 
             extraConfig = {
               icon_only = true;
               separator = "";
               padding = { left = 1; right = 0; };
             };
-          }
+          })
           {
             name = "filename";
             extraConfig = {
