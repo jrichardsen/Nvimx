@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   # TODO: research tabs
   # TODO: hotkeys for toggling
@@ -19,7 +16,15 @@
       treesitter = {
         enable = true;
         # TODO: check if we need more or add option to just install all of them on systems with sufficient storage
-        ensureInstalled = [ "bash" "c" "html" "lua" "markdown" "vim" "vimdoc" ];
+        ensureInstalled = [
+          "bash"
+          "c"
+          "html"
+          "lua"
+          "markdown"
+          "vim"
+          "vimdoc"
+        ];
         indent = true;
       };
     };

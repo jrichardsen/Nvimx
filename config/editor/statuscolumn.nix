@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}:
+{ config, ... }:
 {
   config = {
     plugins.statuscol = {
@@ -9,12 +6,27 @@
       settings = {
         reculright = true;
         segments = [
-          { sign = { name = [ ".*" ]; }; }
-          { 
-            text = [ {__raw = "require('statuscol.builtin').lnumfunc";} " " ];
-            condition = [ true {__raw = "require('statuscol.builtin').not_empty";} ];
+          {
+            sign = {
+              name = [ ".*" ];
+            };
           }
-          { sign = { namespace = [ "gitsign" ]; }; colwidth = 1; }
+          {
+            text = [
+              { __raw = "require('statuscol.builtin').lnumfunc"; }
+              " "
+            ];
+            condition = [
+              true
+              { __raw = "require('statuscol.builtin').not_empty"; }
+            ];
+          }
+          {
+            sign = {
+              namespace = [ "gitsign" ];
+            };
+            colwidth = 1;
+          }
         ];
       };
     };
@@ -27,15 +39,27 @@
     plugins.gitsigns = {
       enable = true;
       settings = {
-        signs = let
-          symbols = config.style.symbols.gitsigns;
-        in {
-          add = { text = symbols.add; };
-          change = { text = symbols.change; };
-          delete = { text = symbols.delete; };
-          topdelete = { text = symbols.topdelete; };
-          changedelete = { text = symbols.changedelete; };
-        };
+        signs =
+          let
+            symbols = config.style.symbols.gitsigns;
+          in
+          {
+            add = {
+              text = symbols.add;
+            };
+            change = {
+              text = symbols.change;
+            };
+            delete = {
+              text = symbols.delete;
+            };
+            topdelete = {
+              text = symbols.topdelete;
+            };
+            changedelete = {
+              text = symbols.changedelete;
+            };
+          };
       };
     };
   };

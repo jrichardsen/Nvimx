@@ -1,12 +1,9 @@
-{
-  lib,
-  config,
-  ...
-}:
+{ lib, config, ... }:
 with lib;
 let
   cfg = config.style;
-in {
+in
+{
   options.style.enableIcons = mkEnableOption "icons";
 
   config = mkIf cfg.enableIcons {
@@ -24,7 +21,7 @@ in {
       git = {
         added = " ";
         modified = " ";
-        removed  = " ";
+        removed = " ";
       };
       gitsigns = {
         add = "▎";

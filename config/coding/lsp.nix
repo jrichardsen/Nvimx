@@ -5,30 +5,32 @@
     ./languages
   ];
   config = {
-    keymaps = let 
-      mkMap = keys: func: desc: {
+    keymaps =
+      let
+        mkMap = keys: func: desc: {
           mode = "n";
           key = "${keys}";
           action = "${func}";
           lua = true;
           options.desc = "LSP: ${desc}";
         };
-    in [
-      (mkMap "[d" "vim.diagnostic.goto_prev" "Go to previous [D]iagnostic Message")
-      (mkMap "]d" "vim.diagnostic.goto_next" "Go to next [D]iagnostic Message")
-      (mkMap "<leader>e" "vim.diagnostic.open_float" "Show diagnostic [E]rror messages")
-      (mkMap "<leader>q" "vim.diagnostic.setloclist" "Open diagnostic [Q]uickfix list")
-      (mkMap "gd" "require('telescope.builtin').lsp_definitions" "[G]oto [D]efinition")
-      (mkMap "gr" "require('telescope.builtin').lsp_references" "[G]oto [R]eferences")
-      (mkMap "gI" "require('telescope.builtin').lsp_implementations" "[G]oto [I]mplementations")
-      (mkMap "<leader>D" "require('telescope.builtin').lsp_type_definitions" "Type [D]efinitions")
-      (mkMap "<leader>ds" "require('telescope.builtin').lsp_document_symbols" "[D]ocument [S]ymbols")
-      (mkMap "<leader>ws" "require('telescope.builtin').lsp_workspace_symbols" "[W]orkspace [S]ymbols")
-      (mkMap "<leader>rn" "vim.lsp.buf.rename" "[R]e[n]ame")
-      (mkMap "<leader>ca" "vim.lsp.buf.code_action" "[C]ode [A]ction")
-      (mkMap "K" "vim.lsp.buf.hover" "Hover Documentation")
-      (mkMap "gD" "vim.lsp.buf.declaration" "[G]oto [D]eclaration")
-    ];
+      in
+      [
+        (mkMap "[d" "vim.diagnostic.goto_prev" "Go to previous [D]iagnostic Message")
+        (mkMap "]d" "vim.diagnostic.goto_next" "Go to next [D]iagnostic Message")
+        (mkMap "<leader>e" "vim.diagnostic.open_float" "Show diagnostic [E]rror messages")
+        (mkMap "<leader>q" "vim.diagnostic.setloclist" "Open diagnostic [Q]uickfix list")
+        (mkMap "gd" "require('telescope.builtin').lsp_definitions" "[G]oto [D]efinition")
+        (mkMap "gr" "require('telescope.builtin').lsp_references" "[G]oto [R]eferences")
+        (mkMap "gI" "require('telescope.builtin').lsp_implementations" "[G]oto [I]mplementations")
+        (mkMap "<leader>D" "require('telescope.builtin').lsp_type_definitions" "Type [D]efinitions")
+        (mkMap "<leader>ds" "require('telescope.builtin').lsp_document_symbols" "[D]ocument [S]ymbols")
+        (mkMap "<leader>ws" "require('telescope.builtin').lsp_workspace_symbols" "[W]orkspace [S]ymbols")
+        (mkMap "<leader>rn" "vim.lsp.buf.rename" "[R]e[n]ame")
+        (mkMap "<leader>ca" "vim.lsp.buf.code_action" "[C]ode [A]ction")
+        (mkMap "K" "vim.lsp.buf.hover" "Hover Documentation")
+        (mkMap "gD" "vim.lsp.buf.declaration" "[G]oto [D]eclaration")
+      ];
     plugins = {
       lsp = {
         enable = true;

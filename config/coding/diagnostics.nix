@@ -1,6 +1,4 @@
-{ config
-, ...
-}:
+{ config, ... }:
 {
   # TODO: add keybindings
   # TODO: configure correctly
