@@ -1,10 +1,10 @@
 {
-  helpers,
-  ...
-}:
-{
+  # TODO: filetype specific settings
   imports = [
     ./autocompletions.nix
+    ./diagnostics.nix
+    ./languages
+    ./lsp.nix
   ];
 
   config = {

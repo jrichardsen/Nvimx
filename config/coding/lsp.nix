@@ -1,4 +1,5 @@
 {
+  # TODO: add formatting support
   imports = [
     ./diagnostics.nix
     ./languages

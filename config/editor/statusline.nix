@@ -5,6 +5,7 @@
 }:
 {
   config = {
+    # TODO: maybe some visualization of indentation settings
     plugins.lualine = let
       symbols = config.style.symbols;
       enableIcons = config.style.enableIcons;

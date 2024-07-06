@@ -3,12 +3,11 @@
   ... 
 }:
 {
+  # TODO: check for useful stuff in lazyvim
   imports = [
     ./coding
-    ./style
     ./editor
-    ./lsp
-    ./ui
+    ./style
   ];
 
   config = {
@@ -83,7 +82,7 @@
       } 
     ];
     autoGroups = {
-      kickstart-highlight-yank = {
+      highlight-yank = {
         clear = true;
       };
     };
@@ -91,7 +90,7 @@
       {
         event = "TextYankPost";
         desc = "Highlight when yanking (copying) text";
-        group = "kickstart-highlight-yank";
+        group = "highlight-yank";
         callback = helpers.mkRaw "function() vim.highlight.on_yank() end";
       }
     ];

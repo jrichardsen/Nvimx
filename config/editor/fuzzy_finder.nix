@@ -6,6 +6,7 @@
         fzf-native.enable = true;
         ui-select.enable = true;
       };
+      # TODO: find more keymaps to add here (use "<leader>ss" to search for them)
       keymaps = {
         "<leader>sh" = { action = "help_tags"; options.desc = "[S]earch [H]elp"; };
         "<leader>sk" = { action = "keymaps"; options.desc = "[S]earch [K]eymaps"; };
@@ -44,6 +45,7 @@
         lua = true;
         options.desc = "[S]earch [/] in Open Files";
       }
+      # TODO: is this really necessary?
       {
         mode = "n";
         key = "<leader>sn";

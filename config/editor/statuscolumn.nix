@@ -19,8 +19,11 @@
       };
     };
 
+    # TODO: checkout plugin options
     plugins.marks.enable = true;
 
+    # TODO: add keybinds and maybe move this to coding/git or something similar
+    # FIXME: show staged diff (darker color)
     plugins.gitsigns = {
       enable = true;
       settings = {

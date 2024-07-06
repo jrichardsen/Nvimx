@@ -4,6 +4,7 @@
 }:
 {
   config = {
+    # TODO: keybindings for managing buffers
     plugins.mini.modules.bufremove = { };
     plugins.bufferline = {
       enable = true;
