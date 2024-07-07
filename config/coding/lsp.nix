@@ -15,17 +15,17 @@
         (mkMap "<leader>e" "vim.diagnostic.open_float" "Show diagnostic [E]rror messages")
         (mkMap "<leader>q" "vim.diagnostic.setloclist" "Open diagnostic [Q]uickfix list")
         (mkMap "gd" "require('telescope.builtin').lsp_definitions" "[G]oto [D]efinition")
+        (mkMap "gD" "vim.lsp.buf.declaration" "[G]oto [D]eclaration")
         (mkMap "gr" "require('telescope.builtin').lsp_references" "[G]oto [R]eferences")
         (mkMap "gI" "require('telescope.builtin').lsp_implementations" "[G]oto [I]mplementations")
-        (mkMap "<leader>D" "require('telescope.builtin').lsp_type_definitions" "Type [D]efinitions")
-        # TODO: remap the next two commands
-        (mkMap "<leader>ds" "require('telescope.builtin').lsp_document_symbols" "[D]ocument [S]ymbols")
-        (mkMap "<leader>ws" "require('telescope.builtin').lsp_workspace_symbols" "[W]orkspace [S]ymbols")
-        (mkMap "<leader>rn" "vim.lsp.buf.rename" "[R]e[n]ame")
+        (mkMap "gy" "require('telescope.builtin').lsp_type_definitions" "[G]oto T[y]pe Definitions")
+        (mkMap "<leader>sd" "require('telescope.builtin').diagnostics" "[S]earch [D]iagnostics")
+        (mkMap "<leader>ss" "require('telescope.builtin').lsp_document_symbols" "[S]earch [S]ymbols (document)")
+        (mkMap "<leader>sS" "require('telescope.builtin').lsp_workspace_symbols" "[S]earch [S]ymbols (workspace)")
         (mkMap "<leader>ca" "vim.lsp.buf.code_action" "[C]ode [A]ction")
-        (mkMap "K" "vim.lsp.buf.hover" "Hover Documentation")
-        (mkMap "gD" "vim.lsp.buf.declaration" "[G]oto [D]eclaration")
         (mkMap "<leader>cf" "function() require('conform').format { async = true, lsp_fallback = true } end" "[C]ode [F]ormat")
+        (mkMap "<leader>cr" "vim.lsp.buf.rename" "[C]ode [R]ename")
+        (mkMap "K" "vim.lsp.buf.hover" "Hover Documentation")
       ];
     plugins = {
       lsp = {

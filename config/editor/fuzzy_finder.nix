@@ -6,7 +6,7 @@
         fzf-native.enable = true;
         ui-select.enable = true;
       };
-      # TODO: find more keymaps to add here (use "<leader>ss" to search for them)
+      # TODO: find more keymaps to add here (use "<leader>st" to search for them)
       keymaps = {
         "<leader>sh" = {
           action = "help_tags";
@@ -20,9 +20,9 @@
           action = "find_files";
           options.desc = "[S]earch [F]iles";
         };
-        "<leader>ss" = {
+        "<leader>st" = {
           action = "builtin";
-          options.desc = "[S]earch [S]elect Telescope";
+          options.desc = "[S]earch [T]elescope";
         };
         "<leader>sw" = {
           action = "grep_string";
@@ -31,10 +31,6 @@
         "<leader>sg" = {
           action = "live_grep";
           options.desc = "[S]earch by [G]rep";
-        };
-        "<leader>sd" = {
-          action = "diagnostics";
-          options.desc = "[S]earch [D]iagnostics";
         };
         "<leader>sr" = {
           action = "resume";
