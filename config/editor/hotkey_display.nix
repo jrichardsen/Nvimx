@@ -2,28 +2,21 @@
   config = {
     plugins.which-key = {
       enable = true;
-      registrations = {
-        "<leader>c" = {
-          name = "[C]ode";
-          _ = "which_key_ignore";
+      registrations =
+        let
+          register = name: {
+            inherit name;
+            _ = "which_key_ignore";
+          };
+        in
+        {
+          "<leader>b" = register "[B]uffers";
+          "<leader>c" = register "[C]ode";
+          "<leader>d" = register "[D]ocument";
+          "<leader>r" = register "[R]ename";
+          "<leader>s" = register "[S]earch";
+          "<leader>w" = register "[W]orkspace";
         };
-        "<leader>d" = {
-          name = "[D]ocument";
-          _ = "which_key_ignore";
-        };
-        "<leader>r" = {
-          name = "[R]ename";
-          _ = "which_key_ignore";
-        };
-        "<leader>s" = {
-          name = "[S]earch";
-          _ = "which_key_ignore";
-        };
-        "<leader>w" = {
-          name = "[W]orkspace";
-          _ = "which_key_ignore";
-        };
-      };
     };
   };
 }

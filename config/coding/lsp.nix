@@ -2,9 +2,9 @@
   config = {
     keymaps =
       let
-        mkMap = keys: func: desc: {
+        mkMap = key: func: desc: {
           mode = "n";
-          key = "${keys}";
+          inherit key;
           action.__raw = "${func}";
           options.desc = "LSP: ${desc}";
         };
@@ -18,6 +18,7 @@
         (mkMap "gr" "require('telescope.builtin').lsp_references" "[G]oto [R]eferences")
         (mkMap "gI" "require('telescope.builtin').lsp_implementations" "[G]oto [I]mplementations")
         (mkMap "<leader>D" "require('telescope.builtin').lsp_type_definitions" "Type [D]efinitions")
+        # TODO: remap the next two commands
         (mkMap "<leader>ds" "require('telescope.builtin').lsp_document_symbols" "[D]ocument [S]ymbols")
         (mkMap "<leader>ws" "require('telescope.builtin').lsp_workspace_symbols" "[W]orkspace [S]ymbols")
         (mkMap "<leader>rn" "vim.lsp.buf.rename" "[R]e[n]ame")
