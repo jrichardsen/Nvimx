@@ -77,19 +77,6 @@
         '';
         options.desc = "[S]earch [/] in Open Files";
       }
-      # TODO: is this really necessary?
-      {
-        mode = "n";
-        key = "<leader>sn";
-        action.__raw = ''
-          function()
-            require('telescope.builtin').find_files {
-              cwd = vim.fn.stdpath 'config',
-            }
-          end
-        '';
-        options.desc = "[S]earch [N]eovim files";
-      }
     ];
   };
 }
