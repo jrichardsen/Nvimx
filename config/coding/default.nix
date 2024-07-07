@@ -3,6 +3,7 @@
   imports = [
     ./autocompletions.nix
     ./diagnostics.nix
+    ./filetypes
     ./languages
     ./lsp.nix
   ];

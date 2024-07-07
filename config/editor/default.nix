@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  # TODO: research tabs
+  # INFO: research tabs
   # TODO: hotkeys for toggling
   imports = [
     ./bufferline.nix

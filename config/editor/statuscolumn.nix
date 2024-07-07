@@ -1,4 +1,7 @@
-{ config, ... }:
+{ config
+, helpers
+, ...
+}:
 {
   config = {
     plugins.statuscol = {
@@ -13,12 +16,12 @@
           }
           {
             text = [
-              { __raw = "require('statuscol.builtin').lnumfunc"; }
+              (helpers.mkRaw "require('statuscol.builtin').lnumfunc")
               " "
             ];
             condition = [
               true
-              { __raw = "require('statuscol.builtin').not_empty"; }
+              (helpers.mkRaw "require('statuscol.builtin').not_empty")
             ];
           }
           {

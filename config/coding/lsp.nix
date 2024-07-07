@@ -1,9 +1,4 @@
 {
-  # TODO: add formatting support
-  imports = [
-    ./diagnostics.nix
-    ./languages
-  ];
   config = {
     keymaps =
       let
@@ -30,6 +25,7 @@
         (mkMap "<leader>ca" "vim.lsp.buf.code_action" "[C]ode [A]ction")
         (mkMap "K" "vim.lsp.buf.hover" "Hover Documentation")
         (mkMap "gD" "vim.lsp.buf.declaration" "[G]oto [D]eclaration")
+        (mkMap "<leader>cf" "function() require('conform').format { async = true, lsp_fallback = true } end" "[C]ode [F]ormat")
       ];
     plugins = {
       lsp = {
@@ -50,6 +46,13 @@
         capabilities = "capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())";
       };
       fidget.enable = true;
+      conform-nvim = {
+        enable = true;
+        formattersByFt = {
+          # Formatters to run for filetypes that do not have other formatters configured
+          "_" = [ "trim_whitespace" ];
+        };
+      };
     };
   };
 }
