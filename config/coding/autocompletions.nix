@@ -26,7 +26,7 @@
               end
             end";
           };
-          # TODO: add buffer as completion source, maybe configurable via toggle?
+          # NOTE: add buffer as completion source, maybe configurable via toggle?
           sources = [
             { name = "nvim_lsp"; }
             { name = "luasnip"; }

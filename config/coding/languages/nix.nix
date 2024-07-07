@@ -7,6 +7,6 @@
       enable = true;
       settings.formatting.command = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
     };
-    # INFO: try to get nixd to work
+    # NOTE: try to get nixd to work
   };
 }

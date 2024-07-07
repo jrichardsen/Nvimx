@@ -1,3 +1,3 @@
 {
-  # TODO: keybind to quickly expand/collapse singleton attrs
+  # NOTE: keybind to quickly expand/collapse singleton attrs
 }
