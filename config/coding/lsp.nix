@@ -5,8 +5,7 @@
         mkMap = keys: func: desc: {
           mode = "n";
           key = "${keys}";
-          action = "${func}";
-          lua = true;
+          action.__raw = "${func}";
           options.desc = "LSP: ${desc}";
         };
       in

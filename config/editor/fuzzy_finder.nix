@@ -54,37 +54,40 @@
       {
         mode = "n";
         key = "<leader>/";
-        action = "function()
-          require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-            winblend = 10,
-            previewer = false,
-          })
-        end";
-        lua = true;
+        action.__raw = ''
+          function()
+            require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+              winblend = 10,
+              previewer = false,
+            })
+          end
+        '';
         options.desc = "[/] Fuzzily search in current buffer";
       }
       {
         mode = "n";
         key = "<leader>s/";
-        action = "function()
-          require('telescope.builtin').live_grep {
-            grep_open_files = true,
-            prompt_title = 'Live Grep in Open Files',
-          }
-        end";
-        lua = true;
+        action.__raw = ''
+          function()
+            require('telescope.builtin').live_grep {
+              grep_open_files = true,
+              prompt_title = 'Live Grep in Open Files',
+            }
+          end
+        '';
         options.desc = "[S]earch [/] in Open Files";
       }
       # TODO: is this really necessary?
       {
         mode = "n";
         key = "<leader>sn";
-        action = "function()
-          require('telescope.builtin').find_files {
-            cwd = vim.fn.stdpath 'config',
-          }
-        end";
-        lua = true;
+        action.__raw = ''
+          function()
+            require('telescope.builtin').find_files {
+              cwd = vim.fn.stdpath 'config',
+            }
+          end
+        '';
         options.desc = "[S]earch [N]eovim files";
       }
     ];

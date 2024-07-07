@@ -3,7 +3,7 @@
 }:
 {
   config = {
-    plugins.lsp.servers.nil_ls = {
+    plugins.lsp.servers.nil-ls = {
       enable = true;
       settings.formatting.command = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
     };

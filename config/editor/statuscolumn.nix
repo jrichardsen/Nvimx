@@ -38,32 +38,34 @@
     plugins.marks.enable = true;
 
     # TODO: add keybinds and maybe move this to coding/git or something similar
-    # FIXME: show staged diff (darker color)
     plugins.gitsigns = {
       enable = true;
-      settings = {
-        signs =
-          let
-            symbols = config.style.symbols.gitsigns;
-          in
-          {
-            add = {
-              text = symbols.add;
+      settings =
+        let
+          symbols = config.style.symbols.gitsigns;
+          signs =
+            {
+              add = {
+                text = symbols.add;
+              };
+              change = {
+                text = symbols.change;
+              };
+              delete = {
+                text = symbols.delete;
+              };
+              topdelete = {
+                text = symbols.topdelete;
+              };
+              changedelete = {
+                text = symbols.changedelete;
+              };
             };
-            change = {
-              text = symbols.change;
-            };
-            delete = {
-              text = symbols.delete;
-            };
-            topdelete = {
-              text = symbols.topdelete;
-            };
-            changedelete = {
-              text = symbols.changedelete;
-            };
-          };
-      };
+        in
+        {
+          inherit signs;
+          signs_staged = signs;
+        };
     };
   };
 }
