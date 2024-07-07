@@ -60,11 +60,15 @@
               changedelete = {
                 text = symbols.changedelete;
               };
+              untracked = {
+                text = symbols.untracked;
+              };
             };
         in
         {
           inherit signs;
           signs_staged = signs;
+          attach_to_untracked = true;
         };
     };
   };
