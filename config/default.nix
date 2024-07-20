@@ -1,4 +1,7 @@
-{ helpers, ... }:
+{ helpers
+, pkgs
+, ...
+}:
 {
   # TODO: check for useful stuff in lazyvim
   imports = [
@@ -16,37 +19,46 @@
     clipboard.register = "unnamedplus";
 
     opts = {
-      number = true;
-      relativenumber = true;
-      mouse = "a";
-      showmode = false;
+      autowrite = true;
       breakindent = true;
-      undofile = true;
+      confirm = true;
+      cursorline = true;
+      expandtab = true;
+      grepformat = "%f:%l:%c:%m";
+      grepprg = "${pkgs.ripgrep}/bin/rg --vimgrep";
+      hlsearch = false;
       ignorecase = true;
-      smartcase = true;
-      signcolumn = "yes";
-      updatetime = 250;
-      timeoutlen = 300;
-      splitright = true;
-      splitbelow = true;
+      inccommand = "split";
+      laststatus = 3;
+      linebreak = true;
       list = true;
       listchars = {
         tab = "» ";
         trail = "·";
         nbsp = "␣";
       };
-      inccommand = "split";
-      cursorline = true;
+      mouse = "a";
+      number = true;
+      relativenumber = true;
       scrolloff = 10;
-      hlsearch = true;
+      shiftround = true;
+      shiftwidth = 2;
+      showmode = false;
+      signcolumn = "yes";
+      smartcase = true;
+      smartindent = true;
+      splitbelow = true;
+      splitright = true;
+      tabstop = 2;
+      termguicolors = true;
+      timeoutlen = 300;
+      undofile = true;
+      updatetime = 250;
+      virtualedit = "block";
+      wrap = true;
     };
 
     keymaps = [
-      {
-        mode = "n";
-        key = "<Esc>";
-        action = "<cmd>nohlsearch<CR>";
-      }
       {
         mode = "t";
         key = "<Esc><Esc>";
@@ -54,28 +66,129 @@
         options.desc = "Exit terminal mode";
       }
       {
+        mode = [ "n" "x" ];
+        key = "j";
+        action = "v:count == 0 ? 'gj' : 'j'";
+        options = {
+          desc = "Down";
+          expr = true;
+          silent = true;
+        };
+      }
+      {
+        mode = [ "n" "x" ];
+        key = "k";
+        action = "v:count == 0 ? 'gk' : 'k'";
+        options = {
+          desc = "Up";
+          expr = true;
+          silent = true;
+        };
+      }
+      {
         mode = "n";
         key = "<C-h>";
         action = "<C-w><C-h>";
-        options.desc = "Move focus to the left window";
+        options.desc = "Go to Left Window";
       }
       {
         mode = "n";
         key = "<C-l>";
         action = "<C-w><C-l>";
-        options.desc = "Move focus to the right window";
+        options.desc = "Go to Right Window";
       }
       {
         mode = "n";
         key = "<C-j>";
         action = "<C-w><C-j>";
-        options.desc = "Move focus to the lower window";
+        options.desc = "Go to Lower Window";
       }
       {
         mode = "n";
         key = "<C-k>";
         action = "<C-w><C-k>";
-        options.desc = "Move focus to the upper window";
+        options.desc = "Go to Upper Window";
+      }
+      {
+        mode = "n";
+        key = "<C-Up>";
+        action = "<cmd>resize +2<cr>";
+        options.desc = "Increase Window Height";
+      }
+      {
+        mode = "n";
+        key = "<C-Down>";
+        action = "<cmd>resize -2<cr>";
+        options.desc = "Decrease Window Height";
+      }
+      {
+        mode = "n";
+        key = "<C-Left>";
+        action = "<cmd>vertical resize -2<cr>";
+        options.desc = "Decrease Window Width";
+      }
+      {
+        mode = "n";
+        key = "<C-Right>";
+        action = "<cmd>vertical resize +2<cr>";
+        options.desc = "Increase Window Width";
+      }
+      {
+        mode = "n";
+        key = "<A-j>";
+        action = "<cmd>m .+1<cr>==";
+        options.desc = "Move Line Down";
+      }
+      {
+        mode = "n";
+        key = "<A-k>";
+        action = "<cmd>m .-2<cr>==";
+        options.desc = "Move Line Up";
+      }
+      {
+        mode = "i";
+        key = "<A-j>";
+        action = "<esc><cmd>m .+1<cr>==gi";
+        options.desc = "Move Line Down";
+      }
+      {
+        mode = "i";
+        key = "<A-k>";
+        action = "<esc><cmd>m .-2<cr>==gi";
+        options.desc = "Move Line Up";
+      }
+      {
+        mode = "v";
+        key = "<A-j>";
+        action = "<cmd>m '>+1<cr>gv=gv";
+        options.desc = "Move Line Down";
+      }
+      {
+        mode = "v";
+        key = "<A-k>";
+        action = "<cmd>m '<-2<cr>gv=gv";
+        options.desc = "Move Line Up";
+      }
+      {
+        mode = "n";
+        key = "<leader>ur";
+        action = "<cmd>nohlsearch<bar>diffupdate<bar>normal! <C-L><CR>";
+        options.desc = "Redraw / Clear hlsearch / Diff Update";
+      }
+      {
+        mode = "i";
+        key = ",";
+        action = ",<c-g>u";
+      }
+      {
+        mode = "i";
+        key = ".";
+        action = ".<c-g>u";
+      }
+      {
+        mode = "i";
+        key = ";";
+        action = ";<c-g>u";
       }
     ];
     autoGroups = {

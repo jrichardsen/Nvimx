@@ -54,5 +54,7 @@
         };
       };
     };
+    opts.formatexpr = "v:lua.require'conform'.formatexpr()";
+    opts.formatoptions = "jcroqlnt";
   };
 }
