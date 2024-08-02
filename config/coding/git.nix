@@ -1,9 +1,11 @@
 { helpers
+, utils
 , ...
 }:
 {
   config = {
-    # TODO: add more keybinds
+    # NOTE: lazygit integration
+    # NOTE: explore how diff mode works
     plugins = {
       gitsigns = {
         enable = true;
@@ -46,5 +48,10 @@
         '';
       };
     };
+    keymaps = [
+      (utils.mkLuaMapN "<leader>gc" "function() require('telescope.builtin').git_commits() end" "[G]it [C]ommits")
+      (utils.mkLuaMapN "<leader>gC" "function() require('telescope.builtin').git_bcommits() end" "[G]it [C]ommits (current file)")
+      (utils.mkLuaMapN "<leader>gs" "function() require('telescope.builtin').git_status() end" "[G]it [S]tatus")
+    ];
   };
 }
