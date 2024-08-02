@@ -1,3 +1,6 @@
+{ utils
+, ...
+}:
 {
   config = {
     plugins.telescope = {
@@ -6,73 +9,52 @@
         fzf-native.enable = true;
         ui-select.enable = true;
       };
-      # TODO: find more keymaps to add here (use "<leader>st" to search for them)
-      keymaps = {
-        "<leader>sh" = {
-          action = "help_tags";
-          options.desc = "[S]earch [H]elp";
+      # TODO: find more keymaps to add here (use "<leader>se" to search for them)
+      keymaps =
+        let
+          mkMap = action: desc: {
+            inherit action;
+            options = { inherit desc; };
+          };
+        in
+        {
+          "<leader><leader>" = mkMap "find_files" "[ ] Find files";
+          "<leader>sb" = mkMap "buffers" "[S]earch [B]uffers";
+          "<leader>se" = mkMap "builtin" "[S]earch T[e]lescope";
+          "<leader>sf" = mkMap "find_files" "[S]earch [F]iles";
+          "<leader>sg" = mkMap "live_grep" "[S]earch by [G]rep";
+          "<leader>sh" = mkMap "help_tags" "[S]earch [H]elp";
+          "<leader>sk" = mkMap "keymaps" "[S]earch [K]eymaps";
+          "<leader>s." = mkMap "oldfiles" "[S]earch Recent Files (\".\" for repeat)";
+          "<leader>sr" = mkMap "resume" "[S]earch [R]esume";
+          "<leader>sw" = mkMap "grep_string" "[S]earch current [W]ord";
         };
-        "<leader>sk" = {
-          action = "keymaps";
-          options.desc = "[S]earch [K]eymaps";
-        };
-        "<leader>sf" = {
-          action = "find_files";
-          options.desc = "[S]earch [F]iles";
-        };
-        "<leader>st" = {
-          action = "builtin";
-          options.desc = "[S]earch [T]elescope";
-        };
-        "<leader>sw" = {
-          action = "grep_string";
-          options.desc = "[S]earch current [W]ord";
-        };
-        "<leader>sg" = {
-          action = "live_grep";
-          options.desc = "[S]earch by [G]rep";
-        };
-        "<leader>sr" = {
-          action = "resume";
-          options.desc = "[S]earch [R]esume";
-        };
-        "<leader>s." = {
-          action = "oldfiles";
-          options.desc = "[S]earch Recent Files (\".\" for repeat)";
-        };
-        "<leader><leader>" = {
-          action = "buffers";
-          options.desc = "[ ] Find existing buffers";
-        };
-      };
     };
     keymaps = [
-      {
-        mode = "n";
-        key = "<leader>/";
-        action.__raw = ''
+      (utils.mkLuaMapN
+        "<leader>/"
+        ''
           function()
             require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
               winblend = 10,
               previewer = false,
             })
           end
-        '';
-        options.desc = "[/] Fuzzily search in current buffer";
-      }
-      {
-        mode = "n";
-        key = "<leader>s/";
-        action.__raw = ''
+        ''
+        "[/] Fuzzily search in current buffer"
+      )
+      (utils.mkLuaMapN
+        "<leader>s/"
+        ''
           function()
             require('telescope.builtin').live_grep {
               grep_open_files = true,
               prompt_title = 'Live Grep in Open Files',
             }
           end
-        '';
-        options.desc = "[S]earch [/] in Open Files";
-      }
+        ''
+        "[S]earch [/] in Open Files"
+      )
     ];
   };
 }

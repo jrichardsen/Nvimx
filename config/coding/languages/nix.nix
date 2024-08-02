@@ -9,4 +9,6 @@
     };
     # NOTE: try to get nixd to work
   };
+  # NOTE: keybind to quickly expand/collapse singleton attrs
+  # TODO: fix indentation
 }

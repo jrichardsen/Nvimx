@@ -11,6 +11,23 @@ with lib;
         };
     in
     {
+      comments = {
+        fix = mkSymbolOption "F";
+        todo = mkSymbolOption "T";
+        hack = mkSymbolOption "H";
+        warn = mkSymbolOption "W";
+        perf = mkSymbolOption "P";
+        note = mkSymbolOption "N";
+        test = mkSymbolOption "T";
+      };
+      dashboard = {
+        find_file = mkSymbolOption "";
+        new_file = mkSymbolOption "";
+        recent_files = mkSymbolOption "";
+        find_text = mkSymbolOption "";
+        restore_session = mkSymbolOption "";
+        quit = mkSymbolOption "";
+      };
       diagnostics = {
         error = mkSymbolOption "E";
         warn = mkSymbolOption "W";

@@ -9,10 +9,12 @@
               require('luasnip').lsp_expand(args.body)
             end
           '';
-          completion.completeopt = "menu,menuone,noinsert";
+          completion.completeopt = "menu,menuone,noinsert,noselect";
           mapping = {
             "<C-n>" = "cmp.mapping.select_next_item()";
             "<C-p>" = "cmp.mapping.select_prev_item()";
+            "<CR>" = "cmp.mapping.confirm()";
+            "<S-CR>" = "cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace }";
             "<C-y>" = "cmp.mapping.confirm { select = true }";
             "<C-Space>" = "cmp.mapping.complete {}";
             "<C-l>" = "function() 
@@ -34,7 +36,9 @@
           ];
         };
       };
+      lspkind.cmp.enable = true;
       luasnip.enable = true;
+      friendly-snippets.enable = true;
     };
   };
 }

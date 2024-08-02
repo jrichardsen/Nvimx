@@ -1,9 +1,13 @@
 { helpers
 , pkgs
+, utils
 , ...
 }:
 {
-  # TODO: check for useful stuff in lazyvim
+  # NOTE: make wrapping and spelling depend on the filetype (aucmd?)
+  # NOTE: figure out spelling (different spelllangs)
+  # NOTE: debugging (dap)?
+  # NOTE: performance optimizations?
   imports = [
     ./coding
     ./editor
@@ -20,10 +24,8 @@
 
     opts = {
       autowrite = true;
-      breakindent = true;
       confirm = true;
       cursorline = true;
-      expandtab = true;
       grepformat = "%f:%l:%c:%m";
       grepprg = "${pkgs.ripgrep}/bin/rg --vimgrep";
       hlsearch = false;
@@ -42,14 +44,10 @@
       relativenumber = true;
       scrolloff = 10;
       shiftround = true;
-      shiftwidth = 2;
-      showmode = false;
       signcolumn = "yes";
       smartcase = true;
-      smartindent = true;
       splitbelow = true;
       splitright = true;
-      tabstop = 2;
       termguicolors = true;
       timeoutlen = 300;
       undofile = true;
@@ -58,7 +56,15 @@
       wrap = true;
     };
 
+    # TODO: toggle keymaps (utility function):
+    # - line numbers
+    # - relative line numbers
+    # - diagnostics
+    # - wrap
+    # - spelling
+    # - indentguides
     keymaps = [
+      # NOTE: terminal mode settings
       {
         mode = "t";
         key = "<Esc><Esc>";
@@ -85,123 +91,85 @@
           silent = true;
         };
       }
-      {
-        mode = "n";
-        key = "<C-h>";
-        action = "<C-w><C-h>";
-        options.desc = "Go to Left Window";
-      }
-      {
-        mode = "n";
-        key = "<C-l>";
-        action = "<C-w><C-l>";
-        options.desc = "Go to Right Window";
-      }
-      {
-        mode = "n";
-        key = "<C-j>";
-        action = "<C-w><C-j>";
-        options.desc = "Go to Lower Window";
-      }
-      {
-        mode = "n";
-        key = "<C-k>";
-        action = "<C-w><C-k>";
-        options.desc = "Go to Upper Window";
-      }
-      {
-        mode = "n";
-        key = "<C-Up>";
-        action = "<cmd>resize +2<cr>";
-        options.desc = "Increase Window Height";
-      }
-      {
-        mode = "n";
-        key = "<C-Down>";
-        action = "<cmd>resize -2<cr>";
-        options.desc = "Decrease Window Height";
-      }
-      {
-        mode = "n";
-        key = "<C-Left>";
-        action = "<cmd>vertical resize -2<cr>";
-        options.desc = "Decrease Window Width";
-      }
-      {
-        mode = "n";
-        key = "<C-Right>";
-        action = "<cmd>vertical resize +2<cr>";
-        options.desc = "Increase Window Width";
-      }
-      {
-        mode = "n";
-        key = "<A-j>";
-        action = "<cmd>m .+1<cr>==";
-        options.desc = "Move Line Down";
-      }
-      {
-        mode = "n";
-        key = "<A-k>";
-        action = "<cmd>m .-2<cr>==";
-        options.desc = "Move Line Up";
-      }
-      {
-        mode = "i";
-        key = "<A-j>";
-        action = "<esc><cmd>m .+1<cr>==gi";
-        options.desc = "Move Line Down";
-      }
-      {
-        mode = "i";
-        key = "<A-k>";
-        action = "<esc><cmd>m .-2<cr>==gi";
-        options.desc = "Move Line Up";
-      }
-      {
-        mode = "v";
-        key = "<A-j>";
-        action = "<cmd>m '>+1<cr>gv=gv";
-        options.desc = "Move Line Down";
-      }
-      {
-        mode = "v";
-        key = "<A-k>";
-        action = "<cmd>m '<-2<cr>gv=gv";
-        options.desc = "Move Line Up";
-      }
-      {
-        mode = "n";
-        key = "<leader>ur";
-        action = "<cmd>nohlsearch<bar>diffupdate<bar>normal! <C-L><CR>";
-        options.desc = "Redraw / Clear hlsearch / Diff Update";
-      }
-      {
-        mode = "i";
-        key = ",";
-        action = ",<c-g>u";
-      }
-      {
-        mode = "i";
-        key = ".";
-        action = ".<c-g>u";
-      }
-      {
-        mode = "i";
-        key = ";";
-        action = ";<c-g>u";
-      }
+      (utils.mkCmdMapN "<A-j>" "<cmd>m .+1<cr>==" "Move Line Down")
+      (utils.mkCmdMapN "<A-k>" "<cmd>m .-2<cr>==" "Move Line Up")
+      (utils.mkCmdMap "i" "<A-j>" "<esc><cmd>m .+1<cr>==gi" "Move Line Down")
+      (utils.mkCmdMap "i" "<A-k>" "<esc><cmd>m .-2<cr>==gi" "Move Line Up")
+      (utils.mkCmdMap "v" "<A-j>" "<cmd>m '>+1<cr>gv=gv" "Move Line Down")
+      (utils.mkCmdMap "v" "<A-k>" "<cmd>m '<-2<cr>gv=gv" "Move Line Up")
+      (utils.mkCmdMapN "<leader>ur" "<cmd>nohlsearch<bar>diffupdate<bar>normal! <C-L><CR>" "Redraw / Clear hlsearch / Diff Update")
+      # Additional breakpoints in insert mode
+      (utils.mkCmdMap "i" "," ",<c-g>u" null)
+      (utils.mkCmdMap "i" "." ".<c-g>u" null)
+      (utils.mkCmdMap "i" ";" ";<c-g>u" null)
+      # Reselect after indentation
+      # (utils.mkCmdMap "v" "<" "<gv" null)
+      # (utils.mkCmdMap "v" ">" ">gv" null)
     ];
-    autoGroups = {
-      highlight-yank = {
-        clear = true;
-      };
-    };
+    autoGroups =
+      let
+        createGroup = name: {
+          inherit name; value = { clear = true; };
+        };
+        createGroups = names: builtins.listToAttrs (map createGroup names);
+      in
+      createGroups [
+        "highlight-yank"
+        "checktime"
+        "close_with_q"
+        "auto_create_dir"
+      ];
+
+    # NOTE: more autocommands
     autoCmd = [
       {
-        event = "TextYankPost";
         desc = "Highlight when yanking (copying) text";
+        event = "TextYankPost";
         group = "highlight-yank";
         callback = helpers.mkRaw "function() vim.highlight.on_yank() end";
+      }
+      {
+        desc = "Check if we need to reload the file when it changes";
+        event = [ "FocusGained" "TermClose" "TermLeave" ];
+        group = "checktime";
+        callback = helpers.mkRaw ''
+          function()
+            if vim.o.buftype ~= "nofile" then
+              vim.cmd("checktime")
+            end
+          end
+        '';
+      }
+      {
+        desc = "Close some filetypes with <q>";
+        event = "FileType";
+        group = "close_with_q";
+        # TODO: expose this list as a configuration option
+        pattern = [ "help" "lspinfo" "checkhealth" "gitsigns.blame" ];
+        callback = helpers.mkRaw ''
+          function(event)
+            vim.bo[event.buf].buflisted = false;
+            vim.keymap.set("n", "q", "<cmd>close<cr>", {
+              buffer = event.buf,
+              silent = true,
+              desc = "Quit buffer",
+            })
+          end
+        '';
+      }
+      {
+        desc = "Auto create intermediate directories when saving a file";
+        event = "BufWritePre";
+        group = "auto_create_dir";
+        callback = helpers.mkRaw ''
+          function(event)
+            if event.match:match("^%w%w+:[\\/][\\/]") then
+              return
+            end
+            local file = vim.uv.fs_realpath(event.match) or event.match
+            vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+          end
+        '';
       }
     ];
   };

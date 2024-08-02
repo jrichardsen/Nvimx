@@ -1,7 +1,8 @@
 { lib, config, ... }:
 {
   config = {
-    # TODO: maybe some visualization of indentation settings
+    opts.showmode = false;
+    # NOTE: some visualization of indentation settings
     plugins.lualine =
       let
         symbols = config.style.symbols;
@@ -10,16 +11,19 @@
       {
         enable = true;
         iconsEnabled = enableIcons;
+        globalstatus = config.opts.laststatus == 3;
+        disabledFiletypes.statusline = [ "dashboard" ];
         sections = {
           lualine_a = [ "mode" ];
           lualine_b = [ "branch" ];
           lualine_c = [
             {
-              name = "diff";
+              name = "diagnostics";
               extraConfig.symbols = {
-                added = symbols.git.added;
-                modified = symbols.git.modified;
-                removed = symbols.git.removed;
+                error = symbols.diagnostics.error;
+                warn = symbols.diagnostics.warn;
+                info = symbols.diagnostics.info;
+                hint = symbols.diagnostics.hint;
               };
             }
             (lib.mkIf enableIcons {
@@ -28,7 +32,7 @@
                 icon_only = true;
                 separator = "";
                 padding = {
-                  left = 1;
+                  left = 2;
                   right = 0;
                 };
               };
@@ -47,12 +51,11 @@
           ];
           lualine_x = [
             {
-              name = "diagnostics";
+              name = "diff";
               extraConfig.symbols = {
-                error = symbols.diagnostics.error;
-                warn = symbols.diagnostics.warn;
-                info = symbols.diagnostics.info;
-                hint = symbols.diagnostics.hint;
+                added = symbols.git.added;
+                modified = symbols.git.modified;
+                removed = symbols.git.removed;
               };
             }
           ];

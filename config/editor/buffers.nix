@@ -1,39 +1,32 @@
 { config
+, utils
 , helpers
 , ...
 }:
 {
   config = {
-    keymaps =
-      let
-        mkMap = key: action: desc: {
-          mode = "n";
-          inherit key;
-          inherit action;
-          options = { inherit desc; };
-        };
-      in
-      [
-        (mkMap "<leader>bb" "<cmd>edit #<cr>" "Switch to oher buffer")
-        (mkMap "<leader>bd" (helpers.mkRaw ''function() require("mini.bufremove").delete(0, false) end'') "Delete buffer")
-        (mkMap "<leader>bD" "<cmd>bdelete<cr>" "Delete buffer and window")
-        (mkMap "<leader>bp" "<cmd>BufferLineTogglePin<cr>" "Toggle Pin")
-        (mkMap "<leader>bP" "<cmd>BufferLineGroupClose ungrouped<cr>" "Delete Non-Pinned Buffers")
-        (mkMap "<leader>bo" "<cmd>BufferLineCloseOthers<cr>" "Delete Other Buffers")
-        (mkMap "<leader>bl" "<cmd>BufferLineCloseRight<cr>" "Delete Buffers to the Right")
-        (mkMap "<leader>bh" "<cmd>BufferLineCloseLeft<cr>" "Delete Buffers to the Left")
-        (mkMap "<S-h>" "<cmd>BufferLineCyclePrev<cr>" "Prev Buffer")
-        (mkMap "<S-l>" "<cmd>BufferLineCycleNext<cr>" "Next Buffer")
-        (mkMap "[b" "<cmd>BufferLineCyclePrev<cr>" "Prev Buffer")
-        (mkMap "]b" "<cmd>BufferLineCycleNext<cr>" "Next Buffer")
-        (mkMap "[B" "<cmd>BufferLineMovePrev<cr>" "Move buffer prev")
-        (mkMap "]B" "<cmd>BufferLineMoveNext<cr>" "Move buffer next")
-      ];
+    # NOTE: open dashboard when last buffer is removed
+    keymaps = [
+      (utils.mkCmdMapN "<leader>bb" "<cmd>edit #<cr>" "Switch to oher buffer")
+      (utils.mkLuaMapN "<leader>bd" ''function() require("mini.bufremove").delete(0, false) end'' "Delete buffer")
+      (utils.mkCmdMapN "<leader>bD" "<cmd>bdelete<cr>" "Delete buffer and window")
+      (utils.mkCmdMapN "<leader>bp" "<cmd>BufferLineTogglePin<cr>" "Toggle Pin")
+      (utils.mkCmdMapN "<leader>bP" "<cmd>BufferLineGroupClose ungrouped<cr>" "Delete Non-Pinned Buffers")
+      (utils.mkCmdMapN "<leader>bo" "<cmd>BufferLineCloseOthers<cr>" "Delete Other Buffers")
+      (utils.mkCmdMapN "<leader>bl" "<cmd>BufferLineCloseRight<cr>" "Delete Buffers to the Right")
+      (utils.mkCmdMapN "<leader>bh" "<cmd>BufferLineCloseLeft<cr>" "Delete Buffers to the Left")
+      (utils.mkCmdMapN "<S-h>" "<cmd>BufferLineCyclePrev<cr>" "Prev Buffer")
+      (utils.mkCmdMapN "<S-l>" "<cmd>BufferLineCycleNext<cr>" "Next Buffer")
+      (utils.mkCmdMapN "[b" "<cmd>BufferLineCyclePrev<cr>" "Prev Buffer")
+      (utils.mkCmdMapN "]b" "<cmd>BufferLineCycleNext<cr>" "Next Buffer")
+      (utils.mkCmdMapN "[B" "<cmd>BufferLineMovePrev<cr>" "Move buffer prev")
+      (utils.mkCmdMapN "]B" "<cmd>BufferLineMoveNext<cr>" "Move buffer next")
+    ];
     plugins.mini.modules.bufremove = { };
     plugins.bufferline = {
       enable = true;
       alwaysShowBufferline = false;
-      closeCommand = ''function(n) require("mini.bufremove").delete(n, false) end'';
+      closeCommand = helpers.mkRaw ''function(n) require("mini.bufremove").delete(n, false) end'';
       diagnostics = "nvim_lsp";
       diagnosticsIndicator =
         let

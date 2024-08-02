@@ -12,6 +12,7 @@
           {
             sign = {
               name = [ ".*" ];
+              namespace = [ ".*" ];
             };
           }
           {
@@ -27,17 +28,16 @@
           {
             sign = {
               namespace = [ "gitsign" ];
+              colwidth = 1;
             };
-            colwidth = 1;
           }
         ];
       };
     };
 
-    # TODO: checkout plugin options
+    # NOTE: checkout plugin options
     plugins.marks.enable = true;
 
-    # TODO: add keybinds and maybe move this to coding/git or something similar
     plugins.gitsigns = {
       enable = true;
       settings =
