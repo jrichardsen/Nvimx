@@ -19,6 +19,15 @@
       (utils.mkLuaMapN "]d" "vim.diagnostic.goto_next" "Go to next [D]iagnostic Message")
       (utils.mkLuaMapN "<leader>cd" "vim.diagnostic.open_float" "Show [C]ode Line [D]iagnostics")
       (utils.mkLuaMapN "<leader>sd" "require('telescope.builtin').diagnostics" "[S]earch [D]iagnostics")
+      (utils.mkLuaMapN "<leader>ud" ''
+        function()
+          if vim.diagnostic.is_disabled() then
+            vim.diagnostic.enable()
+          else
+            vim.diagnostic.disable()
+          end
+        end
+      '' "Toggle diagnostics")
     ];
     # configure signs for diagnostics
     diagnostics = {

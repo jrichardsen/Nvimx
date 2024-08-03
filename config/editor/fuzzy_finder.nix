@@ -9,7 +9,7 @@
         fzf-native.enable = true;
         ui-select.enable = true;
       };
-      # TODO: find more keymaps to add here (use "<leader>se" to search for them)
+      # NOTE: find more keymaps to add here (use "<leader>se" to search for them)
       keymaps =
         let
           mkMap = action: desc: {

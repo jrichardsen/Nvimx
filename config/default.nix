@@ -56,14 +56,14 @@
       wrap = true;
     };
 
-    # TODO: toggle keymaps (utility function):
-    # - line numbers
-    # - relative line numbers
-    # - diagnostics
-    # - wrap
-    # - spelling
-    # - indentguides
+    # NOTE: unify descriptions of keymaps
     keymaps = [
+      (utils.mkToggleMapN "<leader>ul" "number" "Line numbers")
+      (utils.mkToggleMapN "<leader>uL" "relativenumber" "Relative line numbers")
+      (utils.mkToggleMapN "<leader>uw" "wrap" "Wrap")
+      (utils.mkToggleMapN "<leader>us" "spell" "Spelling")
+      (utils.mkToggleMapN "<leader>uh" "list" "Hidden characters")
+      (utils.mkCmdMapN "<leader>ut" "<cmd>TSToggle highlight<cr>" "Toggle Treesitter highlight")
       # NOTE: terminal mode settings
       {
         mode = "t";

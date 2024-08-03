@@ -51,6 +51,7 @@
         };
       };
       # NOTE: restrict list of some grammars for a more lightweight variant
+      # NOTE: treesitter keybinds for inspecting
       treesitter = {
         enable = true;
         gccPackage = null;

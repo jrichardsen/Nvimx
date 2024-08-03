@@ -18,4 +18,10 @@ rec {
 
   mkLuaMapN = key: action: desc:
     mkLuaMap [ "n" ] key action desc;
+
+  mkToggleMap = mode: key: setting: name: 
+    mkCmdMap mode key "<cmd>set ${setting}!<cr>" "Toggle ${name}";
+
+  mkToggleMapN = key: setting: name:
+    mkToggleMap [ "n" ] key setting "Toggle ${name}";
 }

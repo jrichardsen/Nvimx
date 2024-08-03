@@ -1,6 +1,5 @@
 {
   # NOTE: research tabs
-  # TODO: hotkeys for ui
   imports = [
     ./buffers.nix
     ./dashboard.nix

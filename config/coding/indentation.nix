@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ pkgs
+, utils
+, ...
+}:
 {
   opts = {
     breakindent = true;
@@ -24,6 +27,15 @@
       ];
     };
   };
+
+  keymaps = [
+    (utils.mkLuaMapN "<leader>ug" ''
+      function()
+        local enabled = require("ibl.config").get_config(0).enabled
+        require("ibl").setup_buffer(0, { enabled = not enabled })
+      end
+    '' "Toggle Indentation guides")
+  ];
 
   extraPlugins = with pkgs.vimPlugins; [
     vim-sleuth
