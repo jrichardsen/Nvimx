@@ -1,3 +1,6 @@
+{ lib
+, ...
+}:
 {
   # TODO: add more languages
   #   - rust
@@ -7,9 +10,18 @@
   #   - jupyter-notebook support?
   #   - ...
 
-  # TODO: make option to enable language support for each language and one option to enable all languages
   imports = [
     ./lua.nix
     ./nix.nix
   ];
+
+  options = { 
+    languages.enableAll = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enables support for all available languages by default.
+      Can be overridden for individual languages by setting
+      `languages.<language>.enable`.";
+      default = true;
+    };
+  };
 }

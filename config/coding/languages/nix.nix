@@ -1,8 +1,14 @@
 { pkgs
+, lib
+, config
 , ...
 }:
 {
-  config = {
+  options = {
+    languages.nix.enable = lib.mkEnableOption "Nix language support" // { default = config.languages.enableAll; };
+  };
+
+  config = lib.mkIf config.languages.nix.enable {
     plugins.lsp.servers.nil-ls = {
       enable = true;
       settings.formatting.command = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];

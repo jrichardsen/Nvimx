@@ -144,7 +144,6 @@
         desc = "Close some filetypes with <q>";
         event = "FileType";
         group = "close_with_q";
-        # TODO: expose this list as a configuration option
         pattern = [ "help" "lspinfo" "checkhealth" "gitsigns.blame" ];
         callback = helpers.mkRaw ''
           function(event)
