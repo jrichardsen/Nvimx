@@ -10,6 +10,7 @@
         ui-select.enable = true;
       };
       # NOTE: find more keymaps to add here (use "<leader>se" to search for them)
+      # NOTE: search in root directory or current working directory?
       keymaps =
         let
           mkMap = action: desc: {

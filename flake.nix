@@ -31,7 +31,8 @@
               inherit utils;
             };
           };
-          nvim = nixvim'.makeNixvimWithModule nixvimModule;
+          nvimx = nixvim'.makeNixvimWithModule nixvimModule;
+          nvimxNoIcons = nvimx.extend { style.enableIcons = false; };
         in
         {
           checks = {
@@ -41,7 +42,9 @@
 
           packages = {
             # Lets you run `nix run .` to start nixvim
-            default = nvim;
+            default = nvimx;
+            inherit nvimx;
+            inherit nvimxNoIcons;
           };
         };
     };

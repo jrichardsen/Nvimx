@@ -5,7 +5,7 @@
 }:
 {
   options = {
-    languages.nix.enable = lib.mkEnableOption "Nix language support" // { default = config.languages.enableAll; };
+    languages.nix.enable = lib.mkEnableOption "Nix language support" // { default = config.languages.enableByDefault; };
   };
 
   config = lib.mkIf config.languages.nix.enable {

@@ -2,7 +2,6 @@
 , ...
 }:
 {
-  # TODO: filetype specific settings
   imports = [
     ./autocompletions.nix
     ./comments.nix

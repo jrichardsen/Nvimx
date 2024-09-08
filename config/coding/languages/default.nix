@@ -2,21 +2,20 @@
 , ...
 }:
 {
-  # TODO: add more languages
-  #   - rust
-  #   - latex
-  #   - c/c++ (clangd)
+  # NOTE: add more languages
   #   - python
   #   - jupyter-notebook support?
   #   - ...
 
   imports = [
-    ./lua.nix
+    ./c.nix
+    ./latex.nix
     ./nix.nix
+    ./rust.nix
   ];
 
   options = { 
-    languages.enableAll = lib.mkOption {
+    languages.enableByDefault = lib.mkOption {
       type = lib.types.bool;
       description = "Enables support for all available languages by default.
       Can be overridden for individual languages by setting
