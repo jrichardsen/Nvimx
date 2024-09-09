@@ -10,8 +10,10 @@
     plugins.oil = {
       enable = true;
       settings = {
-        columns =
-          lib.optional config.style.icons.enable "icon";
+        # HACK: an empty list counts as an empty value and will not be added to
+        # the lua translation, therefore use a list with a raw empty object
+        # instead.
+        columns = [ (if config.style.icons.enable then "icon" else { __raw = ""; }) ];
         keymaps = {
           "<leader>f?" = "actions.show_help";
           "-" = "actions.parent";

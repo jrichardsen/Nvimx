@@ -8,7 +8,7 @@
 
     plugins.conform-nvim = {
       enable = true;
-      formattersByFt = {
+      settings.formatters_by_ft = {
         # Formatters to run for filetypes that do not have other formatters configured
         "_" = [ "trim_whitespace" ];
       };

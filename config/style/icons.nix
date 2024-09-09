@@ -4,7 +4,6 @@ let
   cfg = config.style;
 in
 {
-  # TODO: verify that disabling this options actually removes all icons
   options.style.icons.enable = mkOption {
     default = true;
     example = false;

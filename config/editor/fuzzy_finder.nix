@@ -1,4 +1,5 @@
-{ utils
+{ config
+, utils
 , ...
 }:
 {
@@ -9,6 +10,17 @@
         fzf-native.enable = true;
         ui-select.enable = true;
       };
+      settings.pickers = 
+        let
+          setDevicons = { disable_devicons = !config.style.icons.enable; };
+        in 
+        {
+          buffers = setDevicons;
+          find_files = setDevicons;
+          grep_string = setDevicons;
+          live_grep = setDevicons;
+          oldfiles = setDevicons;
+        };
       # NOTE: find more keymaps to add here (use "<leader>se" to search for them)
       # NOTE: search in root directory or current working directory?
       keymaps =

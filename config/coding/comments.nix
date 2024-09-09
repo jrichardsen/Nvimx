@@ -12,7 +12,7 @@
     plugins.comment.enable = true;
     plugins.todo-comments = {
       enable = true;
-      keywords =
+      settings.keywords =
         let
           symbols = config.style.symbols.comments;
         in

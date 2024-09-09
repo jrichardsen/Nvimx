@@ -25,20 +25,22 @@
     plugins.mini.modules.bufremove = { };
     plugins.bufferline = {
       enable = true;
-      alwaysShowBufferline = false;
-      closeCommand = helpers.mkRaw ''function(n) require("mini.bufremove").delete(n, false) end'';
-      diagnostics = "nvim_lsp";
-      diagnosticsIndicator =
-        let
-          icons = config.style.symbols.diagnostics;
-        in
-        ''
-          function(_, _, diag)
-            local ret = (diag.error and "${icons.error}" .. diag.error .. " " or "")
-              .. (diag.warning and "${icons.warn}" .. diag.warning or "")
-            return vim.trim(ret)
-          end
-        '';
+      settings.options = {
+        always_show_bufferline = false;
+        close_command = helpers.mkRaw ''function(n) require("mini.bufremove").delete(n, false) end'';
+        diagnostics = "nvim_lsp";
+        diagnostics_indicator =
+          let
+            icons = config.style.symbols.diagnostics;
+          in
+          ''
+            function(_, _, diag)
+              local ret = (diag.error and "${icons.error}" .. diag.error .. " " or "")
+                .. (diag.warning and "${icons.warn}" .. diag.warning or "")
+              return vim.trim(ret)
+            end
+          '';
+      };
     };
   };
 }
