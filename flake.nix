@@ -32,7 +32,7 @@
             };
           };
           nvimx = nixvim'.makeNixvimWithModule nixvimModule;
-          nvimxNoIcons = nvimx.extend { style.enableIcons = false; };
+          nvimxNoIcons = nvimx.extend { style.icons.enable = false; };
         in
         {
           checks = {

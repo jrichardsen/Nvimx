@@ -6,7 +6,7 @@
     plugins.lualine =
       let
         symbols = config.style.symbols;
-        enableIcons = config.style.enableIcons;
+        enableIcons = config.style.icons.enable;
       in
       {
         enable = true;

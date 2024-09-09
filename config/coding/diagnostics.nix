@@ -10,7 +10,7 @@
     # plugins.trouble = {
     #   enable = true;
     #   settings = {
-    #     icons = config.style.enableIcons;
+    #     icons = config.style.icons.enable;
     #     use_diagnostic_signs = true;
     #   };
     # };

@@ -5,7 +5,7 @@ let
 in
 {
   # TODO: verify that disabling this options actually removes all icons
-  options.style.enableIcons = mkOption {
+  options.style.icons.enable = mkOption {
     default = true;
     example = false;
     description = "Whether to enable icons.";
@@ -13,7 +13,7 @@ in
   };
 
   # NOTE: mini icons?
-  config = mkIf cfg.enableIcons {
+  config = mkIf cfg.icons.enable {
     style.symbols = {
       comments = {
         fix = " ";
