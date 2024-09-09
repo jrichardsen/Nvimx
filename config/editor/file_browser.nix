@@ -11,7 +11,7 @@
       enable = true;
       settings = {
         columns =
-          lib.optional config.style.enableIcons "icon";
+          lib.optional config.style.icons.enable "icon";
         keymaps = {
           "<leader>f?" = "actions.show_help";
           "-" = "actions.parent";
@@ -35,9 +35,9 @@
                 local oil = require("oil")
                 local config = require("oil.config")
                 if #config.columns <= 1 then
-                  oil.set_columns({${if config.style.enableIcons then " \"icon\"," else ""} "permissions", "size", "mtime" })
+                  oil.set_columns({${if config.style.icons.enable then " \"icon\"," else ""} "permissions", "size", "mtime" })
                 else
-                  oil.set_columns({${if config.style.enableIcons then " \"icon\"" else ""} })
+                  oil.set_columns({${if config.style.icons.enable then " \"icon\"" else ""} })
                 end
               end
             '';

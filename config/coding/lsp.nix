@@ -34,7 +34,7 @@
           (utils.mkLuaMapN "K" "vim.lsp.buf.hover" "Hover Documentation")
         ];
       };
-      lspkind.enable = config.style.enableIcons;
+      lspkind.enable = config.style.icons.enable;
       fidget.enable = true;
       # NOTE: inlay hints
       # NOTE: code lenses
