@@ -5,7 +5,7 @@
 {
   # NOTE: improve language support
   options = {
-    languages.rust.enable = lib.mkEnableOption "Rust language support" // { default = config.languages.enableByDefault; };
+    languages.rust.enable = lib.mkEnableOption "Rust language support";
   };
 
   config = lib.mkIf config.languages.rust.enable {

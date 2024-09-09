@@ -5,7 +5,7 @@
 {
   # NOTE: improve language support
   options = {
-    languages.latex.enable = lib.mkEnableOption "LaTeX language support" // { default = config.languages.enableByDefault; };
+    languages.latex.enable = lib.mkEnableOption "LaTeX language support";
   };
 
   config = lib.mkIf config.languages.latex.enable {

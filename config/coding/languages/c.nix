@@ -5,7 +5,7 @@
 {
   # NOTE: improve language support
   options = {
-    languages.c.enable = lib.mkEnableOption "C/C++ language support" // { default = config.languages.enableByDefault; };
+    languages.c.enable = lib.mkEnableOption "C/C++ language support";
   };
 
   config = lib.mkIf config.languages.c.enable {

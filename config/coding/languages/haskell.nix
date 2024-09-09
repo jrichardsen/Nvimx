@@ -5,7 +5,7 @@
 {
   # NOTE: improve language support
   options = {
-    languages.haskell.enable = lib.mkEnableOption "Haskell language support" // { default = config.languages.enableByDefault; };
+    languages.haskell.enable = lib.mkEnableOption "Haskell language support";
   };
 
   config = lib.mkIf config.languages.haskell.enable {
