@@ -4,8 +4,4 @@
     ./symbols.nix
     ./icons.nix
   ];
-
-  config = {
-    style.enableIcons = true;
-  };
 }

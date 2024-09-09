@@ -5,7 +5,12 @@ let
 in
 {
   # TODO: verify that disabling this options actually removes all icons
-  options.style.enableIcons = mkEnableOption "icons";
+  options.style.enableIcons = mkOption {
+    default = true;
+    example = false;
+    description = "Whether to enable icons.";
+    type = lib.types.bool;
+  };
 
   # NOTE: mini icons?
   config = mkIf cfg.enableIcons {
