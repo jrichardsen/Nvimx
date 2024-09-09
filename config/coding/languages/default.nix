@@ -17,7 +17,7 @@
   ];
 
   options = { 
-    languages.enableByDefault = lib.mkEnableOption {
+    languages.enableByDefault = lib.mkOption {
       type = lib.types.bool;
       description = "Enables support for all available languages by default.
       Can be overridden for individual languages by setting
@@ -27,7 +27,7 @@
   };
 
   config = {
-    languages = 
+    languages =
       let
         default = lib.mkDefault config.languages.enableByDefault;
       in
