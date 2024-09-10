@@ -1,7 +1,8 @@
-{ helpers
-, pkgs
-, utils
-, ...
+{
+  helpers,
+  pkgs,
+  utils,
+  ...
 }:
 {
   # NOTE: make wrapping and spelling depend on the filetype (aucmd?)
@@ -72,7 +73,10 @@
         options.desc = "Exit terminal mode";
       }
       {
-        mode = [ "n" "x" ];
+        mode = [
+          "n"
+          "x"
+        ];
         key = "j";
         action = "v:count == 0 ? 'gj' : 'j'";
         options = {
@@ -82,7 +86,10 @@
         };
       }
       {
-        mode = [ "n" "x" ];
+        mode = [
+          "n"
+          "x"
+        ];
         key = "k";
         action = "v:count == 0 ? 'gk' : 'k'";
         options = {
@@ -97,7 +104,9 @@
       (utils.mkCmdMap "i" "<A-k>" "<esc><cmd>m .-2<cr>==gi" "Move Line Up")
       (utils.mkCmdMap "v" "<A-j>" "<cmd>m '>+1<cr>gv=gv" "Move Line Down")
       (utils.mkCmdMap "v" "<A-k>" "<cmd>m '<-2<cr>gv=gv" "Move Line Up")
-      (utils.mkCmdMapN "<leader>ur" "<cmd>nohlsearch<bar>diffupdate<bar>normal! <C-L><CR>" "Redraw / Clear hlsearch / Diff Update")
+      (utils.mkCmdMapN "<leader>ur" "<cmd>nohlsearch<bar>diffupdate<bar>normal! <C-L><CR>"
+        "Redraw / Clear hlsearch / Diff Update"
+      )
       # Additional breakpoints in insert mode
       (utils.mkCmdMap "i" "," ",<c-g>u" null)
       (utils.mkCmdMap "i" "." ".<c-g>u" null)
@@ -109,7 +118,10 @@
     autoGroups =
       let
         createGroup = name: {
-          inherit name; value = { clear = true; };
+          inherit name;
+          value = {
+            clear = true;
+          };
         };
         createGroups = names: builtins.listToAttrs (map createGroup names);
       in
@@ -130,7 +142,11 @@
       }
       {
         desc = "Check if we need to reload the file when it changes";
-        event = [ "FocusGained" "TermClose" "TermLeave" ];
+        event = [
+          "FocusGained"
+          "TermClose"
+          "TermLeave"
+        ];
         group = "checktime";
         callback = helpers.mkRaw ''
           function()
@@ -144,7 +160,12 @@
         desc = "Close some filetypes with <q>";
         event = "FileType";
         group = "close_with_q";
-        pattern = [ "help" "lspinfo" "checkhealth" "gitsigns.blame" ];
+        pattern = [
+          "help"
+          "lspinfo"
+          "checkhealth"
+          "gitsigns.blame"
+        ];
         callback = helpers.mkRaw ''
           function(event)
             vim.bo[event.buf].buflisted = false;

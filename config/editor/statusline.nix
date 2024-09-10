@@ -31,21 +31,21 @@
               }
               (lib.mkIf enableIcons {
                 __unkeyed-1 = "filetype";
-                  icon_only = true;
-                  separator = "";
-                  padding = {
-                    left = 2;
-                    right = 0;
-                  };
+                icon_only = true;
+                separator = "";
+                padding = {
+                  left = 2;
+                  right = 0;
+                };
               })
               {
                 __unkeyed-1 = "filename";
-                  path = 1;
-                  symbols = {
-                    modified = symbols.file.modified;
-                    readonly = symbols.file.readonly;
-                    unnamed = symbols.file.unnamed;
-                  };
+                path = 1;
+                symbols = {
+                  modified = symbols.file.modified;
+                  readonly = symbols.file.readonly;
+                  unnamed = symbols.file.unnamed;
+                };
               }
             ];
             lualine_x = [

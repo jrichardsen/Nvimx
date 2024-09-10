@@ -1,7 +1,4 @@
-{ helpers
-, utils
-, ...
-}:
+{ helpers, utils, ... }:
 {
   config = {
     # NOTE: lazygit integration
@@ -49,9 +46,15 @@
       };
     };
     keymaps = [
-      (utils.mkLuaMapN "<leader>gc" "function() require('telescope.builtin').git_commits() end" "[G]it [C]ommits")
-      (utils.mkLuaMapN "<leader>gC" "function() require('telescope.builtin').git_bcommits() end" "[G]it [C]ommits (current file)")
-      (utils.mkLuaMapN "<leader>gs" "function() require('telescope.builtin').git_status() end" "[G]it [S]tatus")
+      (utils.mkLuaMapN "<leader>gc" "function() require('telescope.builtin').git_commits() end"
+        "[G]it [C]ommits"
+      )
+      (utils.mkLuaMapN "<leader>gC" "function() require('telescope.builtin').git_bcommits() end"
+        "[G]it [C]ommits (current file)"
+      )
+      (utils.mkLuaMapN "<leader>gs" "function() require('telescope.builtin').git_status() end"
+        "[G]it [S]tatus"
+      )
     ];
   };
 }

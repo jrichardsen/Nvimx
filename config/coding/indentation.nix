@@ -1,7 +1,4 @@
-{ pkgs
-, utils
-, ...
-}:
+{ pkgs, utils, ... }:
 {
   opts = {
     breakindent = true;
@@ -22,9 +19,7 @@
         show_start = false;
         show_end = false;
       };
-      exclude.filetypes = [
-        "dashboard"
-      ];
+      exclude.filetypes = [ "dashboard" ];
     };
   };
 
@@ -37,7 +32,5 @@
     '' "Toggle Indentation guides")
   ];
 
-  extraPlugins = with pkgs.vimPlugins; [
-    vim-sleuth
-  ];
+  extraPlugins = with pkgs.vimPlugins; [ vim-sleuth ];
 }

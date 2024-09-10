@@ -1,7 +1,4 @@
-{ utils
-, config
-, ...
-}:
+{ utils, config, ... }:
 {
   config = {
     keymaps = [

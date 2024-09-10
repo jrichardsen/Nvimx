@@ -1,6 +1,4 @@
-{ utils
-, ...
-}:
+{ utils, ... }:
 {
   # NOTE: formatting of injected languages
   config = {
@@ -16,8 +14,7 @@
     opts.formatexpr = "v:lua.require'conform'.formatexpr()";
 
     plugins.lsp.keymaps.extra = [
-      (utils.mkLuaMapN
-        "<leader>cf"
+      (utils.mkLuaMapN "<leader>cf"
         "function() require('conform').format { async = true, lsp_fallback = true } end"
         "[C]ode [F]ormat"
       )

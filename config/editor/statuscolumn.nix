@@ -1,7 +1,4 @@
-{ config
-, helpers
-, ...
-}:
+{ config, helpers, ... }:
 {
   config = {
     plugins.statuscol = {
@@ -43,27 +40,26 @@
       settings =
         let
           symbols = config.style.symbols.gitsigns;
-          signs =
-            {
-              add = {
-                text = symbols.add;
-              };
-              change = {
-                text = symbols.change;
-              };
-              delete = {
-                text = symbols.delete;
-              };
-              topdelete = {
-                text = symbols.topdelete;
-              };
-              changedelete = {
-                text = symbols.changedelete;
-              };
-              untracked = {
-                text = symbols.untracked;
-              };
+          signs = {
+            add = {
+              text = symbols.add;
             };
+            change = {
+              text = symbols.change;
+            };
+            delete = {
+              text = symbols.delete;
+            };
+            topdelete = {
+              text = symbols.topdelete;
+            };
+            changedelete = {
+              text = symbols.changedelete;
+            };
+            untracked = {
+              text = symbols.untracked;
+            };
+          };
         in
         {
           inherit signs;

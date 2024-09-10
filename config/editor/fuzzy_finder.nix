@@ -1,7 +1,4 @@
-{ config
-, utils
-, ...
-}:
+{ config, utils, ... }:
 {
   config = {
     plugins.telescope = {
@@ -10,10 +7,12 @@
         fzf-native.enable = true;
         ui-select.enable = true;
       };
-      settings.pickers = 
+      settings.pickers =
         let
-          setDevicons = { disable_devicons = !config.style.icons.enable; };
-        in 
+          setDevicons = {
+            disable_devicons = !config.style.icons.enable;
+          };
+        in
         {
           buffers = setDevicons;
           find_files = setDevicons;
@@ -27,7 +26,9 @@
         let
           mkMap = action: desc: {
             inherit action;
-            options = { inherit desc; };
+            options = {
+              inherit desc;
+            };
           };
         in
         {
@@ -44,30 +45,22 @@
         };
     };
     keymaps = [
-      (utils.mkLuaMapN
-        "<leader>/"
-        ''
-          function()
-            require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-              winblend = 10,
-              previewer = false,
-            })
-          end
-        ''
-        "[/] Fuzzily search in current buffer"
-      )
-      (utils.mkLuaMapN
-        "<leader>s/"
-        ''
-          function()
-            require('telescope.builtin').live_grep {
-              grep_open_files = true,
-              prompt_title = 'Live Grep in Open Files',
-            }
-          end
-        ''
-        "[S]earch [/] in Open Files"
-      )
+      (utils.mkLuaMapN "<leader>/" ''
+        function()
+          require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+            winblend = 10,
+            previewer = false,
+          })
+        end
+      '' "[/] Fuzzily search in current buffer")
+      (utils.mkLuaMapN "<leader>s/" ''
+        function()
+          require('telescope.builtin').live_grep {
+            grep_open_files = true,
+            prompt_title = 'Live Grep in Open Files',
+          }
+        end
+      '' "[S]earch [/] in Open Files")
     ];
   };
 }

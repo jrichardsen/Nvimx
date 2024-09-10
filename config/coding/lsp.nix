@@ -1,7 +1,4 @@
-{ utils
-, config
-, ...
-}:
+{ utils, config, ... }:
 {
   config = {
     plugins = {
@@ -26,9 +23,15 @@
           (utils.mkLuaMapN "gD" "vim.lsp.buf.declaration" "[G]oto [D]eclaration")
           (utils.mkLuaMapN "gr" "require('telescope.builtin').lsp_references" "[G]oto [R]eferences")
           (utils.mkLuaMapN "gI" "require('telescope.builtin').lsp_implementations" "[G]oto [I]mplementations")
-          (utils.mkLuaMapN "gy" "require('telescope.builtin').lsp_type_definitions" "[G]oto T[y]pe Definitions")
-          (utils.mkLuaMapN "<leader>ss" "require('telescope.builtin').lsp_document_symbols" "[S]earch [S]ymbols (document)")
-          (utils.mkLuaMapN "<leader>sS" "require('telescope.builtin').lsp_workspace_symbols" "[S]earch [S]ymbols (workspace)")
+          (utils.mkLuaMapN "gy" "require('telescope.builtin').lsp_type_definitions"
+            "[G]oto T[y]pe Definitions"
+          )
+          (utils.mkLuaMapN "<leader>ss" "require('telescope.builtin').lsp_document_symbols"
+            "[S]earch [S]ymbols (document)"
+          )
+          (utils.mkLuaMapN "<leader>sS" "require('telescope.builtin').lsp_workspace_symbols"
+            "[S]earch [S]ymbols (workspace)"
+          )
           (utils.mkLuaMapN "<leader>ca" "vim.lsp.buf.code_action" "[C]ode [A]ction")
           (utils.mkLuaMapN "<leader>cr" "vim.lsp.buf.rename" "[C]ode [R]ename")
           (utils.mkLuaMapN "K" "vim.lsp.buf.hover" "Hover Documentation")

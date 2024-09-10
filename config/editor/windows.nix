@@ -1,6 +1,4 @@
-{ utils
-, ...
-}:
+{ utils, ... }:
 {
   config = {
     plugins.tmux-navigator = {

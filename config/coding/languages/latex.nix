@@ -1,7 +1,4 @@
-{ lib
-, config
-, ...
-}:
+{ lib, config, ... }:
 {
   # NOTE: improve language support
   options = {
@@ -15,13 +12,24 @@
       settings = {
         texlab = {
           build = {
-            args = [ "-pdf" "-view=pdf" "-interaction=nonstopmode" "--shell-escape" "-synctex=1" "%f" ];
+            args = [
+              "-pdf"
+              "-view=pdf"
+              "-interaction=nonstopmode"
+              "--shell-escape"
+              "-synctex=1"
+              "%f"
+            ];
             onSave = true;
             forwardSearchAfter = true;
           };
           forwardSearch = {
             executable = "zathura";
-            args = [ "--synctex-forward" "%l:1:%f" "%p" ];
+            args = [
+              "--synctex-forward"
+              "%l:1:%f"
+              "%p"
+            ];
           };
         };
       };

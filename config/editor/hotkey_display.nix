@@ -1,6 +1,4 @@
-{ config
-, ...
-}:
+{ config, ... }:
 {
   config = {
     plugins.which-key = {

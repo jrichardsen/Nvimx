@@ -1,6 +1,4 @@
-{ helpers
-, ...
-}:
+{ helpers, ... }:
 {
   imports = [
     ./autocompletions.nix
@@ -36,7 +34,7 @@
               '';
             };
           };
-          surround = { 
+          surround = {
             mappings = {
               add = "gsa";
               delete = "gsd";

@@ -1,7 +1,8 @@
-{ config
-, utils
-, helpers
-, ...
+{
+  config,
+  utils,
+  helpers,
+  ...
 }:
 {
   config = {
@@ -42,12 +43,13 @@
           let
             symbols = config.style.symbols.diagnostics;
           in
-          helpers.mkRaw ''{
-            [vim.diagnostic.severity.ERROR] = "${symbols.error}";
-            [vim.diagnostic.severity.WARN] = "${symbols.warn}";
-            [vim.diagnostic.severity.HINT] = "${symbols.hint}";
-            [vim.diagnostic.severity.INFO] = "${symbols.info}";
-          }'';
+          helpers.mkRaw ''
+            {
+                        [vim.diagnostic.severity.ERROR] = "${symbols.error}";
+                        [vim.diagnostic.severity.WARN] = "${symbols.warn}";
+                        [vim.diagnostic.severity.HINT] = "${symbols.hint}";
+                        [vim.diagnostic.severity.INFO] = "${symbols.info}";
+                      }'';
       };
     };
   };

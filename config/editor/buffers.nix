@@ -1,14 +1,17 @@
-{ config
-, utils
-, helpers
-, ...
+{
+  config,
+  utils,
+  helpers,
+  ...
 }:
 {
   config = {
     # NOTE: open dashboard when last buffer is removed
     keymaps = [
       (utils.mkCmdMapN "<leader>bb" "<cmd>edit #<cr>" "Switch to oher buffer")
-      (utils.mkLuaMapN "<leader>bd" ''function() require("mini.bufremove").delete(0, false) end'' "Delete buffer")
+      (utils.mkLuaMapN "<leader>bd" ''function() require("mini.bufremove").delete(0, false) end''
+        "Delete buffer"
+      )
       (utils.mkCmdMapN "<leader>bD" "<cmd>bdelete<cr>" "Delete buffer and window")
       (utils.mkCmdMapN "<leader>bp" "<cmd>BufferLineTogglePin<cr>" "Toggle Pin")
       (utils.mkCmdMapN "<leader>bP" "<cmd>BufferLineGroupClose ungrouped<cr>" "Delete Non-Pinned Buffers")

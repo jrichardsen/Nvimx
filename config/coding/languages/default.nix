@@ -1,7 +1,4 @@
-{ lib
-, config
-, ...
-}:
+{ lib, config, ... }:
 {
   # NOTE: add more languages
   #   - python
@@ -16,7 +13,7 @@
     ./rust.nix
   ];
 
-  options = { 
+  options = {
     languages.enableByDefault = lib.mkOption {
       type = lib.types.bool;
       description = "Enables support for all available languages by default.
