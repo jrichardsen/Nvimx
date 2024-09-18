@@ -115,29 +115,12 @@
       # (utils.mkCmdMap "v" "<" "<gv" null)
       # (utils.mkCmdMap "v" ">" ">gv" null)
     ];
-    autoGroups =
-      let
-        createGroup = name: {
-          inherit name;
-          value = {
-            clear = true;
-          };
-        };
-        createGroups = names: builtins.listToAttrs (map createGroup names);
-      in
-      createGroups [
-        "highlight-yank"
-        "checktime"
-        "close_with_q"
-        "auto_create_dir"
-      ];
 
     # NOTE: more autocommands
     autoCmd = [
       {
         desc = "Highlight when yanking (copying) text";
         event = "TextYankPost";
-        group = "highlight-yank";
         callback = helpers.mkRaw "function() vim.highlight.on_yank() end";
       }
       {
@@ -147,7 +130,6 @@
           "TermClose"
           "TermLeave"
         ];
-        group = "checktime";
         callback = helpers.mkRaw ''
           function()
             if vim.o.buftype ~= "nofile" then
@@ -159,7 +141,6 @@
       {
         desc = "Close some filetypes with <q>";
         event = "FileType";
-        group = "close_with_q";
         pattern = [
           "help"
           "lspinfo"
@@ -180,7 +161,6 @@
       {
         desc = "Auto create intermediate directories when saving a file";
         event = "BufWritePre";
-        group = "auto_create_dir";
         callback = helpers.mkRaw ''
           function(event)
             if event.match:match("^%w%w+:[\\/][\\/]") then
