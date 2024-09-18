@@ -112,8 +112,8 @@
       (utils.mkCmdMap "i" "." ".<c-g>u" null)
       (utils.mkCmdMap "i" ";" ";<c-g>u" null)
       # Reselect after indentation
-      # (utils.mkCmdMap "v" "<" "<gv" null)
-      # (utils.mkCmdMap "v" ">" ">gv" null)
+      (utils.mkCmdMap "v" "<" "<gv" null)
+      (utils.mkCmdMap "v" ">" ">gv" null)
     ];
 
     # NOTE: more autocommands
