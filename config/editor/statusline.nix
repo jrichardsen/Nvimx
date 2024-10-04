@@ -2,7 +2,6 @@
 {
   config = {
     opts.showmode = false;
-    # NOTE: some visualization of indentation settings
     plugins.lualine =
       let
         symbols = config.style.symbols;
