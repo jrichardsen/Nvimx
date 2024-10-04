@@ -8,7 +8,6 @@
   config = lib.mkIf config.languages.latex.enable {
     plugins.lsp.servers.texlab = {
       enable = true;
-      # TODO: test this
       settings = {
         texlab = {
           build = {

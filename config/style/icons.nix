@@ -11,7 +11,6 @@ in
     type = lib.types.bool;
   };
 
-  # NOTE: mini icons?
   config = mkIf cfg.icons.enable {
     style.symbols = {
       comments = {

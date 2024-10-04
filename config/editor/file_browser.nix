@@ -6,7 +6,6 @@
 }:
 {
   config = {
-    # NOTE: git aware file operations
     plugins.oil = {
       enable = true;
       settings = {
@@ -49,7 +48,6 @@
           "<leader>fx" = "actions.open_external";
         };
         use_default_keymaps = false;
-        # NOTE: lsp file method
       };
     };
 

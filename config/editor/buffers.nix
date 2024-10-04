@@ -6,7 +6,6 @@
 }:
 {
   config = {
-    # NOTE: open dashboard when last buffer is removed
     keymaps = [
       (utils.mkCmdMapN "<leader>bb" "<cmd>edit #<cr>" "Switch to oher buffer")
       (utils.mkLuaMapN "<leader>bd" ''function() require("mini.bufremove").delete(0, false) end''

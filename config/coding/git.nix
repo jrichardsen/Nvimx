@@ -4,6 +4,7 @@
     # NOTE: lazygit integration
     # NOTE: explore how diff mode works
     plugins = {
+      fugitive.enable = true;
       gitsigns = {
         enable = true;
         settings.on_attach = helpers.mkRaw ''

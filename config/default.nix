@@ -116,7 +116,6 @@
       (utils.mkCmdMap "v" ">" ">gv" null)
     ];
 
-    # NOTE: more autocommands
     autoCmd = [
       {
         desc = "Highlight when yanking (copying) text";

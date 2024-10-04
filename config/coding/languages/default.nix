@@ -1,6 +1,7 @@
 { lib, config, ... }:
 {
   # NOTE: add more languages
+  #   - bash
   #   - python
   #   - jupyter-notebook support?
   #   - ...
