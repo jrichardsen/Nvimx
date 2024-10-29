@@ -5,7 +5,10 @@
       enable = true;
       settings = {
         theme = "doom";
-        hide.statusline = false;
+        hide = {
+          statusline = false;
+          tabline = false;
+        };
         config = {
           header =
             lib.replicate 10 ""
