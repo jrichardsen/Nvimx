@@ -1,13 +1,21 @@
 { lib, config, ... }:
+let
+  cfg = config.languages.latex;
+in
+with lib;
 {
   # NOTE: improve language support
   options = {
-    languages.latex.enable = lib.mkEnableOption "LaTeX language support";
+    languages.latex = {
+      enable = mkEnableOption "LaTeX language support";
+      bundleTooling = mkEnableOption "bundled tooling";
+    };
   };
 
-  config = lib.mkIf config.languages.latex.enable {
+  config = mkIf cfg.enable {
     plugins.lsp.servers.texlab = {
       enable = true;
+      package = mkIf (!cfg.bundleTooling) (mkDefault null);
       settings = {
         texlab = {
           build = {

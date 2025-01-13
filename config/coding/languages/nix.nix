@@ -4,18 +4,28 @@
   config,
   ...
 }:
+let
+  cfg = config.languages.nix;
+in
+with lib;
 {
   options = {
-    languages.nix.enable = lib.mkEnableOption "Nix language support";
+    languages.nix = {
+      enable = mkEnableOption "Nix language support";
+      bundleTooling = mkEnableOption "bundled tooling";
+    };
   };
 
-  config = lib.mkIf config.languages.nix.enable {
+  config = mkIf cfg.enable {
     plugins.lsp.servers.nil-ls = {
       enable = true;
-      settings.formatting.command = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
+      settings.formatting.command = [
+        (if cfg.bundleTooling then "${pkgs.nixfmt-rfc-style}/bin/nixfmt" else "nixfmt")
+      ];
     };
     # NOTE: try to get nixd to work
   };
   # NOTE: keybind to quickly expand/collapse singleton attrs
   # NOTE: fix indentation
+  # NOTE: make path completions for directories omit the final /
 }

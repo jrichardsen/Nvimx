@@ -42,6 +42,7 @@
           "<leader>s." = mkMap "oldfiles" "[S]earch Recent Files (\".\" for repeat)";
           "<leader>sr" = mkMap "resume" "[S]earch [R]esume";
           "<leader>sw" = mkMap "grep_string" "[S]earch current [W]ord";
+          # NOTE: map for man pages
         };
     };
     keymaps = [
